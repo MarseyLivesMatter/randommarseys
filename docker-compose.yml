@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - 11488:80
+    volumes:
+      - ./:/srv/www
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - www
+  phpfpm:
+    image: php:fpm-alpine
+    volumes:
+      - ./:/srv/www
+    networks:
+      - www
+
+networks:
+  www:
